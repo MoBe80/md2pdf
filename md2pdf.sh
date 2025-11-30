@@ -11,7 +11,7 @@
 # Parameter:
 #   <markdown-file>    Pfad zur Markdown-Datei (erforderlich)
 #   -s <name>          Optional: Stylesheet-Name (ohne .css)
-#                      Standard: style.css
+#                      Standard: verwendet DEFAULT_CSS Variable
 #                      Beispiel: -s myStyle → verwendet ~/.pandoc/myStyle.css
 #
 # Features:
@@ -36,6 +36,9 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
+
+# Pfad zur default css Datei
+DEFAULT_CSS="$HOME/.pandoc/style.css"
 
 # Funktion: Fehler ausgeben und beenden
 error_exit() {
@@ -133,7 +136,7 @@ check_stylesheet() {
 # Hauptlogik
 main() {
     local markdown_file=""
-    local stylesheet_name="style"
+    local stylesheet_path="$DEFAULT_CSS"
     
     # Parameter parsen
     while [[ $# -gt 0 ]]; do
@@ -142,7 +145,7 @@ main() {
                 if [[ -z "${2:-}" ]]; then
                     error_exit "Option -s erfordert einen Stylesheet-Namen."
                 fi
-                stylesheet_name="$2"
+                stylesheet_path="$HOME/.pandoc/${2}.css"
                 shift 2
                 ;;
             -*)
@@ -176,9 +179,6 @@ main() {
     
     # Prüfe Abhängigkeiten
     check_dependencies
-    
-    # Erstelle Stylesheet-Pfad
-    local stylesheet_path="$HOME/.pandoc/${stylesheet_name}.css"
     
     # Prüfe ob Stylesheet existiert
     check_stylesheet "$stylesheet_path"
