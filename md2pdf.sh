@@ -38,7 +38,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Pfad zur default css Datei
-DEFAULT_CSS="$HOME/.pandoc/style.css"
+DEFAULT_CSS="$HOME/.pandoc/qubidu.css"
 
 # Funktion: Fehler ausgeben und beenden
 error_exit() {
