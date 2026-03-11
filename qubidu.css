@@ -120,7 +120,7 @@ h4 {
 /* Absätze */
 p {
   margin-bottom: 4mm;
-  text-align: justify;
+  text-align: left;
   hyphens: auto;
 }
 
@@ -200,6 +200,11 @@ th {
   font-weight: 600;
   text-align: left;
   padding: 3mm;
+}
+
+th:first-child,
+td:first-child {
+  max-width: 35%;
 }
 
 td {
